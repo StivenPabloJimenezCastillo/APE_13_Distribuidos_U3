@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  mdb-master:
+    image: mariadb:10.11
+    container_name: mdb-master
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mariadb_master.cnf:/etc/mysql/mariadb.conf.d/replication.cnf
+  
+  mdb-replica1:
+    image: mariadb:10.11
+    container_name: mdb-replica1
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpass
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mariadb_replica1.cnf:/etc/mysql/mariadb.conf.d/replication.cnf
+  
+  mdb-replica2:
+    image: mariadb:10.11
+    container_name: mdb-replica2
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpass
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./mariadb_replica2.cnf:/etc/mysql/mariadb.conf.d/replication.cnf
